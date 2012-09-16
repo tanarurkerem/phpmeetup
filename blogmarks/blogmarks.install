@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ *
+ * more info: http://drupal.org/node/146843
+ */
+function blogmarks_schema() {
+  $schema['blogmarks'] = array(
+    'description' => 'Blogmarks module base table',
+    'fields' => array(
+      'title' => array(
+        'description' => 'Title of the blogmark',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'url' => array(
+        'description' => 'Title of the blogmark',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    /*
+    'indexes' => array(
+      '' => array(''),
+    ),
+    'unique keys' => array(
+      '' => array('')
+    ),
+    'foreign keys' => array(
+      '' => array(
+        'table' => '',
+        'columns' => array('' => ''),
+      ),
+    ),
+    'primary key' => array(''),
+     */
+  );
+  return $schema;
+}
