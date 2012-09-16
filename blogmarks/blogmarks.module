@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function blogmarks_menu() {
+  $items['blogmarks'] = array(
+    'title' => 'Blogmarks',
+    'page callback' => 'blogmarks_page',
+    'access arguments' => array('access content'),
+  );
+
+  return $items;
+}
+
+/**
+ * Blogmarks page
+ */
+function blogmarks_page() {
+  return 'TODO: Implement it';
+}
