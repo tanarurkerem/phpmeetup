@@ -20,9 +20,30 @@ function blogmarks_page() {
   $result = db_select('blogmarks', 'b')->extend('PagerDefault')->limit(10)
             ->fields('b')
             ->execute();
+  return array(
+    '#theme' => 'blogmarks_list',
+    '#blogmarks' => $result,
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function blogmarks_theme($existing, $type, $theme, $path) {
+  return array(
+    'blogmarks_list' => array(
+      'variables' => array('blogmarks' => NULL),
+    ),
+  );
+}
+
+/**
+ * Theme function of blogmarks list
+ */
+function theme_blogmarks_list($variables) {
   $links = array();
-  foreach ($result as $record) {
-   $links[] = l($record->title, $record->url);
+  foreach ($variables['blogmarks'] as $record) {
+     $links[] = l($record->title, $record->url);
   }
   return theme('item_list', array('items' => $links)) . theme('pager');
 }
