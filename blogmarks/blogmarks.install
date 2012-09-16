@@ -42,3 +42,27 @@ function blogmarks_schema() {
   );
   return $schema;
 }
+
+/**
+ * Implements hook_install().
+ */
+function blogmarks_install() {
+  db_insert('blogmarks')
+    ->fields(array(
+      'title' => 'Weblabor',
+      'url' => 'http://weblabor.hu',
+      ))
+    ->execute();
+  db_insert('blogmarks')
+    ->fields(array(
+      'title' => 'Drupal Hompage',
+      'url' => 'http://drupal.org',
+      ))
+    ->execute();
+  db_insert('blogmarks')
+    ->fields(array(
+      'title' => 'Drupal Hungary',
+      'url' => 'http://drupal.hu',
+      ))
+    ->execute();
+}
