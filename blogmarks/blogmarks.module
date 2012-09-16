@@ -17,5 +17,12 @@ function blogmarks_menu() {
  * Blogmarks page
  */
 function blogmarks_page() {
-  return 'TODO: Implement it';
+  $result = db_select('blogmarks', 'b')
+            ->fields('b')
+            ->execute();
+  $links = array();
+  foreach ($result as $record) {
+   $links[] = l($record->title, $record->url);
+  }
+  return theme('item_list', array('items' => $links));
 }
