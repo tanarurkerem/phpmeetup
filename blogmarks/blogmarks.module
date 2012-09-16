@@ -9,6 +9,12 @@ function blogmarks_menu() {
     'page callback' => 'blogmarks_page',
     'access arguments' => array('access content'),
   );
+  $items['blogmarks/add'] = array(
+    'title' => 'Add blogmarks',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('blogmarks_add_form'),
+    'access arguments' => array('access content'),
+  );
 
   return $items;
 }
@@ -46,4 +52,51 @@ function theme_blogmarks_list($variables) {
      $links[] = l($record->title, $record->url);
   }
   return theme('item_list', array('items' => $links)) . theme('pager');
+}
+
+/**
+ * Blogmark add form
+ */
+function blogmarks_add_form($form_state) {
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#default_value' => '',
+    '#required' => TRUE,
+  );
+  $form['url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Url'),
+    '#default_value' => '',
+    '#required' => TRUE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  return $form;
+}
+
+/**
+ * Blogmark validate
+ */
+function blogmarks_add_form_validate($form, &$form_state) {
+  $url = parse_url($form_state['values']['url']);
+  if (empty($url)) {
+    form_set_error('url', t('Wrong url.'));
+  }
+  elseif (!isset($url['scheme'])) {
+    form_set_error('url', t('Please provide a scheme. eg.: "http://".'));
+  }
+
+}
+
+/**
+ * Blogmark save
+ */
+function blogmarks_add_form_submit($form, &$form_state) {
+  db_insert('blogmarks')
+    ->fields(array_intersect_key($form_state['values'], array('title' => '', 'url' => '')))
+    ->execute();
+  $form_state['redirect'] = 'blogmarks';
 }
