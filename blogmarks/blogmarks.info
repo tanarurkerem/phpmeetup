@@ -1,0 +1,3 @@
+name = Blogmarks
+description = Example module for PHPMeetup Hungary
+core = 7.x
