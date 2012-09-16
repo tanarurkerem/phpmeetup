@@ -17,12 +17,12 @@ function blogmarks_menu() {
  * Blogmarks page
  */
 function blogmarks_page() {
-  $result = db_select('blogmarks', 'b')
+  $result = db_select('blogmarks', 'b')->extend('PagerDefault')->limit(1)
             ->fields('b')
             ->execute();
   $links = array();
   foreach ($result as $record) {
    $links[] = l($record->title, $record->url);
   }
-  return theme('item_list', array('items' => $links));
+  return theme('item_list', array('items' => $links)) . theme('pager');
 }
