@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Blogmarks-Feature feature.
+ */
+
+include_once 'blogmarks_feature.features.inc';

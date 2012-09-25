@@ -1,0 +1,16 @@
+name = Blogmarks-Feature
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = blogmarks_feature
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = field_sql_storage
+dependencies[] = node
+dependencies[] = text
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[field][] = node-blogmark-field_url
+features[node][] = blogmark
+features[views_view][] = blogmarks
